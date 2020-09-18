@@ -1,16 +1,19 @@
 import React from 'react';
-import {Button} from './components/Button/Button';
+import { AppCopiesProvider, AppCopies } from './context/appCopiesContext';
+import { Page } from './components/Page/Page';
 
-function App() {
+const defaultCopies: AppCopies = {
+  title: 'Hey',
+  description: 'There!',
+  modalButton: 'Open Modal',
+}
+
+export const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <Button onClick={() => console.log('test')}>
-          Test
-        </Button>
-      </header>
+      <AppCopiesProvider data={defaultCopies}>
+        <Page />
+      </AppCopiesProvider>
     </div>
   );
 }
-
-export default App;
