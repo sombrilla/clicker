@@ -4,8 +4,9 @@ import { useAppGenericModal } from '../../context/appGenericModalContext';
 
 
 export type GenericModalProps = {
+    isOpen: boolean
     onConfirm: () => void;
-    onClose?: () => void;
+    onClose: () => void;
     copies: {
         title: string;
         description: string;
@@ -14,16 +15,17 @@ export type GenericModalProps = {
     }
 }
 
-export const GenericModal: React.FC<GenericModalProps> = ({ onConfirm, onClose, copies }) => {
-    const isOpen = useAppGenericModal.useDataGenericModalData();
-    const setIsOpen = useAppGenericModal.useSetGenericModalData();
+export const GenericModal: React.FC = () => {
+    const genericModalContext = useAppGenericModal.useDataGenericModalData() as GenericModalProps;
 
-    if (!isOpen) return null;
+    if (!genericModalContext || !genericModalContext.isOpen) return null;
+
+    const { copies, onConfirm, onClose } = genericModalContext;
 
     return <div>
         <h3>{copies.title}</h3>
         <p>{copies.description}</p>
         <Button onClick={onConfirm}>{copies.confirm}</Button>
-        <Button onClick={() => (onClose && onClose()) || setIsOpen(false)}>{copies.cancel}</Button>
+        <Button onClick={onClose}>{copies.cancel}</Button>
     </div>;
 }

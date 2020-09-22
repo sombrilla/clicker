@@ -15,7 +15,19 @@ export const Page: React.FC<PageProps> = () => {
             <h1>{title}</h1>
             <h2>{description}</h2>
         </header>
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button
+            onClick={() => setIsModalOpen({
+                isOpen: true,
+                onClose: () => setIsModalOpen(false),
+                onConfirm: () => console.log('confirmed'),
+                copies: {
+                    title: 'Test',
+                    description: 'test',
+                    confirm: 'confirm',
+                    cancel: 'cancel'
+                }
+            }
+            )}>
             {modalButton}
         </Button>
     </>
