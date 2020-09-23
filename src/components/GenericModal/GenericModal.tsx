@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './GenericModal.scss';
+import styles from './GenericModal.module.scss';
 import { Button } from '../Button/Button';
 import { useAppGenericModal } from '../../context/appGenericModalContext';
 
@@ -44,7 +44,7 @@ export const GenericModal: React.FC = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="generic-modal"
+                        className={styles.genericModal}
                         onClick={genericModalContext.onClose}
                     >
                         <motion.div
@@ -52,7 +52,7 @@ export const GenericModal: React.FC = () => {
                             animate={{ y: '0' }}
                             exit={{ y: '100vh' }}
                             transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                            className="generic-modal-content"
+                            className={styles.genericModalContent}
                             onClick={(event) => event.stopPropagation()}
                         >
                             {renderModalContent()}
