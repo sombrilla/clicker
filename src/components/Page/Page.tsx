@@ -6,9 +6,25 @@ import { Button } from '../Button/Button';
 type PageProps = {}
 
 export const Page: React.FC<PageProps> = () => {
-    const { title, description, modalButton } = useAppCopies();
+    const { title, description, successModalButton, errorModalButton, errorModal, successModal } = useAppCopies();
     const setIsModalOpen = useAppGenericModal.useSetGenericModalData();
 
+    const handleOpenErrorModal = () => {
+        setIsModalOpen({
+            isOpen: true,
+            onClose: () => setIsModalOpen(false),
+            onConfirm: () => console.log('confirmed'),
+            copies: errorModal,
+        });
+    }
+
+    const handleOpenSuccessModal = () => {
+        setIsModalOpen({
+            isOpen: true,
+            onClose: () => setIsModalOpen(false),
+            copies: successModal,
+        });
+    }
 
     return <>
         <header>
@@ -16,19 +32,12 @@ export const Page: React.FC<PageProps> = () => {
             <h2>{description}</h2>
         </header>
         <Button
-            onClick={() => setIsModalOpen({
-                isOpen: true,
-                onClose: () => setIsModalOpen(false),
-                onConfirm: () => console.log('confirmed'),
-                copies: {
-                    title: 'Test',
-                    description: 'test',
-                    confirm: 'confirm',
-                    cancel: 'cancel'
-                }
-            }
-            )}>
-            {modalButton}
+            onClick={handleOpenErrorModal}>
+            {errorModalButton}
+        </Button>
+        <Button
+            onClick={handleOpenSuccessModal}>
+            {successModalButton}
         </Button>
     </>
 }
