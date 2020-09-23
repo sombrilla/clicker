@@ -12,11 +12,12 @@
 }
 
 .genericModalContent {
-    background: white;
     padding: 2rem 3rem;
     border-radius: 0.5rem;
     z-index: 3;
-
+    background: var(--primaryColorLight);
+    color: var(--primaryColorLighter);
+    
     h3 {
         margin: 0;
     }

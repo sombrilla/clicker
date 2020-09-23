@@ -2,6 +2,7 @@ import React from 'react';
 import { useAppCopies } from '../../context/appCopiesContext';
 import { useAppGenericModal } from '../../context/appGenericModalContext';
 import { Button } from '../Button/Button';
+import styles from './Page.module.scss';
 
 type PageProps = {}
 
@@ -26,7 +27,7 @@ export const Page: React.FC<PageProps> = () => {
         });
     }
 
-    return <>
+    return <div className={styles.page}>
         <header>
             <h1>{title}</h1>
             <h2>{description}</h2>
@@ -39,5 +40,5 @@ export const Page: React.FC<PageProps> = () => {
             onClick={handleOpenSuccessModal}>
             {successModalButton}
         </Button>
-    </>
+    </div>
 }
