@@ -1,24 +1,39 @@
 import React from 'react';
-import { motion, AnimatePresence, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './GenericModal.scss';
 import { Button } from '../Button/Button';
 import { useAppGenericModal } from '../../context/appGenericModalContext';
 
+export type GenericModalCopies = {
+    title: string;
+    description: string;
+    confirm?: string;
+    cancel?: string;
+}
 
 export type GenericModalProps = {
     isOpen: boolean
-    onConfirm: () => void;
+    onConfirm?: () => void;
     onClose: () => void;
-    copies: {
-        title: string;
-        description: string;
-        confirm: string;
-        cancel: string;
-    }
+    copies: GenericModalCopies;
 }
 
 export const GenericModal: React.FC = () => {
     const genericModalContext = useAppGenericModal.useDataGenericModalData() as GenericModalProps;
+
+    const renderModalContent = () => {
+        if (!genericModalContext) return;
+        const { onConfirm, onClose, copies } = genericModalContext;
+
+        return (
+            <>
+                <h3>{copies.title}</h3>
+                <p>{copies.description}</p>
+                {onConfirm && copies.confirm && <Button onClick={onConfirm}>{copies.confirm}</Button>}
+                {copies.cancel && <Button onClick={onClose}>{copies.cancel}</Button>}
+            </>
+        );
+    }
 
     return (
         <AnimatePresence>
@@ -40,10 +55,7 @@ export const GenericModal: React.FC = () => {
                             className="generic-modal-content"
                             onClick={(event) => event.stopPropagation()}
                         >
-                            <h3>{genericModalContext.copies.title}</h3>
-                            <p>{genericModalContext.copies.description}</p>
-                            <Button onClick={genericModalContext.onConfirm}>{genericModalContext.copies.confirm}</Button>
-                            <Button onClick={genericModalContext.onClose}>{genericModalContext.copies.cancel}</Button>
+                            {renderModalContent()}
                         </motion.div>
                     </motion.div>
                 </>
