@@ -14,8 +14,8 @@ export const Block = React.forwardRef<HTMLDivElement, BlockProps>(({children, fu
     const { blockRef, isActive, direction } = useScrollTrigger();
 
     useEffect(() => {
-        const animation = isActive ? 'blockEnter' : 'blockExit';
-        playAnimation<HTMLDivElement>(blockRef.current, animation, direction);
+        const animation = isActive ? 'blockEnter' : undefined;
+        playAnimation<HTMLDivElement>(blockRef.current, direction, animation);
     }, [isActive]);
 
     return <div ref={ref || blockRef} className={classNames(styles.block, {[styles.fullHeight]: fullHeight})}>
