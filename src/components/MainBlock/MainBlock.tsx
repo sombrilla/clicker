@@ -12,15 +12,17 @@ export const MainBlock: React.FC<MainBlockProps> = () => {
         window.scrollTo({top: window.innerHeight, behavior: 'smooth'});
     }
 
-    return <Block fullHeight>
+    return <Block playsAnimation={false} fullHeight>
+        <img className={styles.background} src="/static/images/main-background.jpg" alt="background" />
         <div className={styles.mainBlock}>
             <header className={styles.header}>
                 <h1>{title}</h1>
-                <h2>{description}</h2>
+                {/* <h2>{description}</h2> */}
             </header>
 
             <button className={styles.button} onClick={scrollWindowHeight}>
-                Scroll!
+                <img src="/static/icons/scroll.svg" alt="scroll icon" />
+                Scroll down!
             </button>
         </div>
     </Block>

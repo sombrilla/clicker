@@ -9,7 +9,9 @@ export const Page: React.FC<PageProps> = () => {
 
     return <div className={styles.page}>
         <MainBlock />
-        <Block fullHeight />
+        <Block fullHeight>
+            asd
+        </Block>
         <Block fullHeight />
     </div>
 }

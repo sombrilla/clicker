@@ -4,21 +4,37 @@ import classNames from 'classnames';
 import styles from './Block.module.scss';
 import { playAnimation } from '../../utils/playAnimation';
 import { useScrollTrigger } from '../../utils/hooks/useScrollTrigger';
+import { Animations } from '../../utils/animations';
 
 type BlockProps = {
     fullHeight?: boolean;
     children?: React.ReactNode;
+    playsAnimation?: boolean;
+    enterAnimation?: keyof Animations;
+    exitAnimation?: keyof Animations;
 }
 
-export const Block = React.forwardRef<HTMLDivElement, BlockProps>(({children, fullHeight = false}, ref: React.Ref<HTMLDivElement>) => {
-    const { blockRef, isActive, direction } = useScrollTrigger();
+export const Block = React.forwardRef<HTMLDivElement, BlockProps>(
+    (
+        {
+            children, 
+            fullHeight = false,
+            playsAnimation = true,
+            enterAnimation = "blockEnter",
+            exitAnimation = "fadeOut"
+        },
+        ref: React.Ref<HTMLDivElement>,
+    ) => 
+    {
+        const { blockRef, isActive, direction } = useScrollTrigger();
 
-    useEffect(() => {
-        const animation = isActive ? 'blockEnter' : undefined;
-        playAnimation<HTMLDivElement>(blockRef.current, direction, animation);
-    }, [isActive]);
+        useEffect(() => {
+            if(!playsAnimation) return;
+            playAnimation<HTMLDivElement>(blockRef.current, direction, isActive ? enterAnimation : exitAnimation);
+        }, [isActive]);
 
-    return <div ref={ref || blockRef} className={classNames(styles.block, {[styles.fullHeight]: fullHeight})}>
-        {children}
-    </div>
-});
+        return <div ref={ref || blockRef} className={classNames(styles.block, {[styles.fullHeight]: fullHeight})}>
+            {children}
+        </div>
+    }
+);

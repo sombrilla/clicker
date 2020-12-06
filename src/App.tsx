@@ -3,7 +3,7 @@ import { AppCopiesProvider, AppCopies } from './context/appCopiesContext';
 import { Page } from './components/Page/Page';
 
 const defaultCopies: AppCopies = {
-  title: 'Hey',
+  title: 'HEY',
   description: 'There!',
 }
 

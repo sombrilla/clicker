@@ -10,7 +10,6 @@ export const useScrollTrigger = () => {
     useEffect(() => {
         if (!blockRef.current) return;
         gsap.registerPlugin(ScrollTrigger);
-        gsap.to(blockRef.current, { autoAlpha: 0 });
 
         ScrollTrigger.create({
             trigger: blockRef.current,
