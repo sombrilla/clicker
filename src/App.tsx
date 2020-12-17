@@ -1,24 +1,25 @@
 import React from 'react';
 import { AppCopiesProvider, AppCopies } from './context/appCopiesContext';
-import { Page } from './components/Page/Page';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { GameInterface } from './components/GameInterface/GameInterface';
+import { Game } from './components/Game/Game';
 
 
 const defaultCopies: AppCopies = {
-  title: 'HEY',
-  secondTitle: 'WELCOME',
-  description: 'There!',
-  scrollLabel: 'Scroll down!',
+  stats: {
+    level: 'Level:',
+    perClick: 'DPC:',
+    perSecond: 'DPS:',
+    army: 'Army count:'
+  }
 }
 
 export const App = () => {
-  gsap.registerPlugin(ScrollTrigger);
 
   return (
     <div className="App">
       <AppCopiesProvider data={defaultCopies}>
-        <Page />
+        <GameInterface />
+        <Game />
       </AppCopiesProvider>
     </div>
   );

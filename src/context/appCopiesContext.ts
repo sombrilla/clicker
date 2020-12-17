@@ -1,10 +1,12 @@
 import { createStaticDataContext } from '../utils/createStaticDataContext';
 
 export type AppCopies = {
-    title: string;
-    secondTitle: string;
-    description: string;
-    scrollLabel: string;
+    stats: {
+        level: string;
+        perClick: string;
+        perSecond: string;
+        army: string;
+    }
 };
 
 const { StaticDataProvider, useStaticData } = createStaticDataContext<AppCopies>();
